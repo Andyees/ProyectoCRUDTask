@@ -1,0 +1,17 @@
+const mongoose = require("mongoose")
+const { boolean } = require("webidl-conversions")
+
+const Schema=mongoose.Schema
+
+const TaskSchema=new Schema({
+    title:String,
+    description:String,
+    status:{
+        type: Boolean,
+        default:false    
+    }
+
+
+})
+
+module.exports=mongoose.model("task",TaskSchema)

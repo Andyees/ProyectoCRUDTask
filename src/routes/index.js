@@ -11,5 +11,14 @@ router.get("/", async(req,res)=>{
     res.render("index",{tareas:tasks})
 })
 
+router.post("/add",(req,res)=>{
+const tarea=new Task(req.body)
+await tarea.save()
+res.redirect("/")
+})
+router.get("/delete",(req,res)=>{
+
+
+})
 
 module.exports=router

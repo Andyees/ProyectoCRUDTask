@@ -1,24 +1,25 @@
-const { Router }=require("express")
-const express=require("express")
-const router=express.Router()
+const { Router } = require("express")
+const express =require("express")
+const router = express.Router()
 
-const Task=require("../models/task")
+const Task= require("../models/task")
 
 router.get("/", async(req,res)=>{
-    console.log("Ingresando a la ruta raiz")
-    const tasks = await Task.find()
-    console.log(tasks)
+ const tasks=  await Task.find();
+
     res.render("index",{tareas:tasks})
 })
 
-router.post("/add",(req,res)=>{
-const tarea=new Task(req.body)
-await tarea.save()
+router.post("/add",async(req,res)=>{
+const task= new Task(req.body);
+await task.save()
 res.redirect("/")
 })
-router.get("/delete",(req,res)=>{
 
-
+router.get("/delete/:id",async(req,res)=>{
+const {id}= req.params
+await Task.deleteOne({_id:id})
+res.redirect("/")
 })
 
-module.exports=router
+module.exports=router;
